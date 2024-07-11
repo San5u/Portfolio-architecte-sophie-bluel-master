@@ -47,11 +47,16 @@ table {
 	border-spacing: 0;
 }
 /** end reset css**/
+html {
+	background: #FFFEF8;
+}
+
 body {
 	max-width: 1140px;
 	margin:auto;
 	font-family: 'Work Sans' ;
 	font-size: 14px;
+	padding-bottom: 60px;
 }
 header {
 	display: flex;
@@ -84,6 +89,17 @@ h2{
 	font-size: 30px;
 	color: #1D6154
 }
+
+button, input[type="submit"] {
+	cursor: pointer;
+	height: 39px;
+}
+input[type="text"], option, textarea, input[type="email"], #selectCategory {
+	font-family: 'Work Sans';
+	font-size:1em;
+	color: #444444 ;  
+}
+
 nav ul {
 	display: flex;
 	align-items: center;
@@ -91,8 +107,10 @@ nav ul {
 
 }
 nav li {
+	
 	padding: 0 10px;
 	font-size: 1.2em;
+	text-decoration: none;
 }
 
 li:hover {
@@ -178,6 +196,10 @@ input[type="submit"]{
 	width: 180px;
 	text-align: center;
 	border-radius: 60px ;
+	font-size: 1,2em;
+	height: 39px;
+	border: none;
+	display: block;
 }
 
 footer nav ul {
@@ -185,4 +207,62 @@ footer nav ul {
 	justify-content: flex-end;
 	margin: 2em
 }
+
+#contact, #login {
+	width: 30%;
+	margin: auto;
+}
+
+#contact, #login > * {
+	text-align: center;
+
+}
+#contact h2, #login h2 {
+	margin-bottom: 20px;
+}
+#contact form, #login form {
+	text-align: left;
+	margin-top:30px;
+	display: flex;
+	flex-direction: column;
+}
+#contact input:not([type="submit"]), #login input:not([type="submit"]), .modal input:not([type="submit"]), #selectCategory {
+	height: 50px;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	padding: 10px;
+	box-sizing: border-box;
+}
+#contact label, #login label {
+	margin: 2em 0 1em 0;
+}
+#contact textarea {
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	padding: 10px;
+	box-sizing: border-box;
+}
+
+#login a {
+	text-decoration: underline;
+font-family: 'Work Sans';
+font-style: normal;
+font-weight: 600;
+color: #3D3D3D;;
+}
+
+#login {
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
+footer nav ul {
+	display: flex;
+	justify-content: flex-end;
+	margin: 2em
+}
+
+
+/* Mot de passe oublié */
+
+
 
