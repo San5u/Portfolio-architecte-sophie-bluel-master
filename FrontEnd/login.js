@@ -27,7 +27,7 @@ document.addEventListener("submit", (e) => {
       alert("Email ou mot de passe erronés");  // Affiche une alerte si le statut de la réponse n'est pas 200
     } else {
       response.json().then((data) => {
-        sessionStorage.setItem("token", data.token);  // Stocke le token dans le sessionStorage
+        localStorage.setItem("token", data.token);  // Stocke le token dans le sessionStorage
         window.location.href="index.html";  // Redirige vers la page "index.html"
       });
     }
