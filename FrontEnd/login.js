@@ -1,4 +1,8 @@
-const baseApiUrl = "http://localhost:5500/api/";  // Définition de l'URL de base de l'API
+const baseApiUrl = "http://localhost:5678/api/";  // Définition de l'URL de base de l'API
+let button = document.getElementById("btnlogin")
+console.log( button )
+
+
 
 document.addEventListener("submit", (e) => {
   e.preventDefault();  // Empêche le rechargement de la page lors de la soumission du formulaire
@@ -24,7 +28,7 @@ document.addEventListener("submit", (e) => {
     } else {
       response.json().then((data) => {
         sessionStorage.setItem("token", data.token);  // Stocke le token dans le sessionStorage
-        window.location.replace("index.html");  // Redirige vers la page "index.html"
+        window.location.href="index.html";  // Redirige vers la page "index.html"
       });
     }
   });
