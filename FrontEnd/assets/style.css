@@ -67,6 +67,7 @@ section {
 	margin: 50px 0
 }
 
+
 h1{
 	display: flex;
 	flex-direction: column;
@@ -80,7 +81,7 @@ h1 > span {
 	font-family: 'Work Sans';
 	font-size:10px;
 	letter-spacing: 0.1em;
-;
+
 }
 
 h2{
@@ -89,6 +90,32 @@ h2{
 	font-size: 30px;
 	color: #1D6154
 }
+
+section {
+	margin: 50px 0
+}
+footer {
+
+	background-color: white;
+	width: 100%;
+	bottom: 0;
+	position: absolute;
+width: 1440px;
+height: 60px;
+left: 0px;
+top: 964px;
+}
+
+img {
+width: 22px;
+height: auto;
+border: 5px 
+}
+
+
+
+
+
 
 button, input[type="submit"] {
 	cursor: pointer;
@@ -106,7 +133,7 @@ nav ul {
 	list-style-type: none;
 
 }
-nav li {
+header li {
 	
 	padding: 0 10px;
 	font-size: 1.2em;
@@ -215,6 +242,12 @@ footer nav ul {
 	margin: auto;
 }
 
+li a {
+text-decoration: none;
+
+}
+
+
 #contact, #login > * {
 	text-align: center;
 
@@ -241,7 +274,7 @@ footer nav ul {
 
 
 #login a {
-	text-decoration: underline;
+text-decoration: underline;
 font-family: 'Work Sans';
 font-style: normal;
 font-weight: 600;
