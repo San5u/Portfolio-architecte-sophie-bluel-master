@@ -45,3 +45,14 @@ document.addEventListener("submit", (e) => {
   });
 });
 
+// Gestion du clic sur le bouton de login/logout
+loginBtn.addEventListener("click", function() {
+  let token = localStorage.getItem("token");
+  if (token) {
+    // Si l'utilisateur est connecté ça va le déco
+    localStorage.removeItem("token");  // Supprime le token du localStorage
+    loginBtn.textContent = "Login";  // Change le texte du bouton en Login
+    alert("You have been logged out.");  // Affiche une alerte pour confirmer la déconnexion
+    window.location.href = "login.html";  // Redirige vers la page de login
+  }
+});
