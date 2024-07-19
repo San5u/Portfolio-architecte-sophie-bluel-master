@@ -47,6 +47,11 @@ table {
 	border-spacing: 0;
 }
 /** end reset css**/
+
+html {
+    scroll-behavior: smooth; /* Ajoute un défilement en douceur pour les ancres */
+}
+
 html {
 	background: #FFFEF8;
 }
