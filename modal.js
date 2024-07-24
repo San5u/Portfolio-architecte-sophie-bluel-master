@@ -34,5 +34,25 @@ const openModal = function () {
       modalStep = null;
     }
   };
-  
+
+
+// Ouvrir la modale
+const openModalImproved = () => {
+  const token = sessionStorage.getItem("token");
+  if (token && token.length === 143) {
+    const modal = document.querySelector(".modal");
+    showModal(modal);
+
+    document.querySelector("#addPicture").style.display = "none";
+    document.querySelector("#editGallery").style.display = "flex";
+    modalGallery(worksData);
+
+    modalStep = 0;
+
+    modal.addEventListener("click", closeModalImproved);
+    document.querySelector(".fa-xmark").addEventListener("click", closeModalImproved);
+    document.addEventListener("click", deleteBtn);
+    document.addEventListener("click", openNewWorkForm);
+  }
+};
  
