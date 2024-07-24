@@ -319,3 +319,13 @@ color: #3D3D3D;;
 	z-index: 2;
 
 }
+
+
+
+  .modal.visible {
+	display: flex;
+  }
+
+  .modalHeader i {
+	cursor: pointer;
+  }
