@@ -291,41 +291,95 @@ color: #3D3D3D;;
 
 
 
-/* Modal */
+/***** MODALE ******/
+
+
 .modal {
-	display: none;
-	align-items: center;
-	justify-content: center;
+	display: none; /* Masquer par défaut */
 	position: fixed;
-	width: 100%;
-	height: 100%;
 	top: 0;
 	left: 0;
-	background: rgba(0, 0, 0, 0.3);
-	z-index: 1;
-}
-.modalWrapper {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	max-width: calc(100vw - 20px);
-	max-height: calc(100vh - 50px);
-	width: 630px;
-	padding: 30px;
-	border-radius: 10px;
-	background-color: #FFFFFF;
-	margin: auto;
-	overflow: auto;
-	z-index: 2;
-
-}
-
-
-
-  .modal.visible {
-	display: flex;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5); /* Fond sombre */
+	z-index: 1000; /* Assurez-vous qu'il est au-dessus des autres éléments */
   }
-
+  
+  .modal.visible {
+	display: block; /* Afficher lorsque la classe 'visible' est ajoutée */
+  }
+  
+  .modalWrapper {
+	position: relative;
+	margin: 15% auto;
+	padding: 20px;
+	background: white;
+	width: 50%;
+	max-width: 500px;
+  }
+  
   .modalHeader i {
 	cursor: pointer;
   }
+  
+  #galleryImages figure {
+	display: inline-block;
+	margin: 10px;
+	position: relative;
+  }
+  
+  .deleteImageBtn {
+	position: absolute;
+	top: 0;
+	right: 0;
+	background: transparent;
+	border: none;
+	cursor: pointer;
+  }
+  
+  .deleteImageBtn i {
+	color: red;
+  }
+  
+
+  /** bouton modifier **/
+
+
+/* Conteneur principal de la section portfolio */
+#portfolio {
+    padding: 50px; /* Ajustez selon vos besoins */
+}
+
+/* Conteneur pour le titre et le bouton Modifier */
+.portfolio-container {
+	display: flex;
+    justify-content: center; /* Centre le titre */
+    align-items: center; /* Aligne verticalement le titre et le bouton Modifier */
+    position: relative; 
+}
+
+/* Style pour le titre "Mes Projets" */
+.portfolio-title {
+    margin: 0; /* Supprime les marges par défaut */
+	margin-right: 10px;
+}
+
+/* Style pour le texte Modifier avec l'icône */
+.edit-button {
+    display: flex;
+    align-items: center;
+    cursor: pointer; /* Ajoute un effet de curseur pointer pour indiquer qu'il s'agit d'un élément cliquable */
+    color: #1D6154; /* Couleur du texte, changez-la selon la couleur de "Mes Projets" */
+	margin-top: -25px;
+}
+
+.edit-button i {
+    margin-right: 5px; /* Espace entre l'icône et le texte */
+    font-size: 1.2em; /* Taille de l'icône */
+	
+}
+
+#editButton {
+    font-size: 1em; /* Taille de la police du texte "Modifier" */
+    font-weight: 700; /* Poids de la police du texte, modifiez si nécessaire */
+}

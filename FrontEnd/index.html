@@ -15,56 +15,58 @@
     <!-- Description de la page pour les moteurs de recherche -->
     <meta name="description" content="">
     <!-- Importation des icônes Font Awesome pour l'utilisation des icônes dans le site -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- Lien vers le fichier CSS pour le style de la page -->
     <link rel="stylesheet" href="./assets/style.css">
-    <!-- Lien vers le fichier JavaScript pour les fonctionnalités de la modale -->
-    <script src="modal.js"></script>
+ 
 </head>
 <body>
-    <!-- Début de la section de la modale -->
-    <aside class="modal">
-        <!-- Première fenêtre modale pour la galerie photo -->
-        <div class="modalWrapper" id="editGallery">
-            <!-- En-tête de la modale avec un bouton pour fermer la fenêtre -->
-            <div class="modalHeader"><i class="fa-solid fa-xmark"></i></div>
+    <aside id="galleryModal" class="modal">
+        <!-- Conteneur pour le contenu de la modale -->
+        <div class="modalWrapper">
+            <!-- Bouton de fermeture de la modale -->
+            <button class="fa fa-xmark"></button>
             <!-- Titre de la modale -->
             <h3 class="modalTitle">Galerie photo</h3>
-            <!-- Contenu de la modale, actuellement vide -->
-            <div class="modalContent">
+            <!-- Contenu de la modale -->
+            <div class="modalContent" id="galleryImages">
+                <!-- Les images de la galerie sont insérées ici -->
             </div>
-            <!-- Bouton pour ajouter une photo à la galerie -->
+            <!-- Bouton pour ajouter une photo -->
             <button id="addPictureBtn">Ajouter une photo</button>
-            <!-- Lien pour supprimer la galerie entière -->
-            <a href="#" id="deleteGallery">Supprimer la galerie</a>
         </div>
-        <!-- Deuxième fenêtre modale pour l'ajout de photo -->
-        <div class="modalWrapper" id="addPicture">
-            <!-- En-tête de la modale avec boutons pour revenir en arrière et fermer la fenêtre -->
-            <div class="modalHeader"><i class="fa-solid fa-arrow-left"></i><i class="fa-solid fa-xmark"></i></div>
+    </aside>
+
+    <!-- Section de la modale pour ajouter une photo -->
+    <aside id="addPictureModal" class="modal">
+        <!-- Conteneur pour le contenu de la modale -->
+        <div class="modalWrapper">
+            <!-- Bouton de fermeture de la modale -->
+            <button class="fa fa-xmark"></button>
             <!-- Titre de la modale -->
             <h3 class="modalTitle">Ajout photo</h3>
-            <!-- Contenu de la modale avec un formulaire pour ajouter une photo -->
+            <!-- Contenu de la modale pour ajouter une photo -->
             <div class="modalContent">
                 <form id="addPictureForm" name="addPictureForm">
-                    <!-- Section pour le téléchargement de l'image avec une étiquette et une image prévisualisée -->
+                    <!-- Zone pour sélectionner une photo -->
                     <div id="labelPhoto">
                         <img src="./assets/icons/picture.png" id="picture" alt="choisir une image">
                         <label for="photo" id="browsePictures">+ Ajouter photo</label>
                         <p>jpg, png : 4mo max</p>
                     </div>
-                    <!-- Zone de prévisualisation de l'image ajoutée -->
+                    <!-- Zone d'aperçu de l'image sélectionnée -->
                     <div id="picturePreview">
                         <img src="#" alt="votre image" id="picturePreviewImg">
                     </div>
-                    <!-- Champ de téléchargement de fichier avec acceptation des formats PNG et JPEG -->
+                    <!-- Champ pour sélectionner un fichier image -->
                     <input type="file" class="photo" name="photo" id="photo" accept="image/png, image/jpeg" required>
-                    <!-- Champ pour le titre de la photo -->
+                    <!-- Champ pour entrer le titre de la photo -->
                     <label for="title">Titre</label>
                     <input type="text" id="title" name="title" required>
-                    <!-- Menu déroulant pour sélectionner la catégorie de la photo -->
+                    <!-- Champ pour sélectionner la catégorie de la photo -->
                     <label for="selectCategory">Catégorie</label>
                     <select id="selectCategory" name="selectCategory">
+                        <!-- Les options de catégories sont ajoutées ici -->
                     </select>
                 </form>
             </div>
@@ -107,8 +109,15 @@
         </section>
 
         <!-- Section des projets avec une galerie d'images -->
-        <section id="portfolio">
-            <h2>Mes Projets</h2>
+		<section id="portfolio">
+			<div class="portfolio-container">
+				<h2 class="portfolio-title">Mes Projets</h2>
+				<!-- Texte "Modifier" avec une icône à gauche -->
+				<div class="edit-button">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                    <span id="editButton">Modifier</span>
+                </div>
+			</div>
             <div class="gallery">
                 <!-- Galerie d'images avec chaque image ayant une légende -->
                 <figure>
@@ -188,7 +197,9 @@
     </footer>
 
     <!-- Importation des fichiers JavaScript pour les fonctionnalités de la page -->
-    <script src="index.js"></script>
-    <script src="function.js"></script>
+    <script src="index.js" defer></script>
+    <script src="function.js" defer></script>
+       <!-- Lien vers le fichier JavaScript pour les fonctionnalités de la modale -->
+       <script src="modal.js" defer></script> 
 </body>
 </html>

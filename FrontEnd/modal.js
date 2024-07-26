@@ -1,53 +1,60 @@
-// Fonction pour afficher la modale
-const showModal = (modal) => {
-  modal.classList.add("visible");
-};
+// Fonction pour afficher une modale spécifique
+const showModal = (modalId) => {
+  // Cacher toutes les modales
+  document.querySelectorAll('.modal').forEach(modal => {
+    modal.classList.remove('visible');
+  });
 
-// Ouvrir la modale si le token d'administrateur est trouvé et a la longueur attendue
-const openModal = function () {
-  const token = sessionStorage.getItem("token");
-  
-  // Vérifier si le token existe et a la longueur attendue (143 caractères)
-  if (token && token.length === 143) {
-    const modal = document.querySelector(".modal");
-    showModal(modal);
-
-    // Afficher ou masquer des éléments spécifiques à l'administration
-    document.querySelector("#addPicture").style.display = "none";
-    document.querySelector("#editGallery").style.display = "flex";
-    modalGallery(worksData);
-
-    modalStep = 0;
-
-    // Ajouter les écouteurs d'événements
-    modal.addEventListener("click", closeModal);
-    document.querySelectorAll(".fa-xmark").forEach((el) => {
-      el.addEventListener("click", closeModal);
-    });
-    document.addEventListener("click", deleteBtn);
-    document.addEventListener("click", openNewWorkForm);
+  // Afficher la modale demandée
+  const modal = document.getElementById(modalId);
+  if (modal) {
+    modal.classList.add('visible');
+  } else {
+    console.error("Modale non trouvée avec l'ID:", modalId);
   }
 };
 
-// Fermer la modale
+// Fonction pour fermer les modales
 const closeModal = function (e) {
-  const modal = document.querySelector(".modal");
-  if (e.target === modal || e.target.classList.contains("fa-xmark")) {
-    modal.classList.remove("visible");
-
-    // Supprimer les écouteurs d'événements
-    modal.removeEventListener("click", closeModal);
-    document.querySelectorAll(".fa-xmark").forEach((el) => {
-      el.removeEventListener("click", closeModal);
-    });
-    document.removeEventListener("click", deleteBtn);
-    document.removeEventListener("click", openNewWorkForm);
-
-    modalStep = null;
+  const modal = e.target.closest('.modal');
+  if (modal) {
+    modal.classList.remove('visible');
   }
 };
 
-// Appel de la fonction pour ouvrir la modale
-openModal();
+// Fonction pour gérer la suppression d'image
+const deleteImage = (e) => {
+  if (e.target.closest('.deleteImageBtn')) {
+    e.target.closest('figure').remove(); // Supprimer l'image du DOM
+  }
+};
 
+// Ajouter des écouteurs d'événements pour les boutons
+document.addEventListener("DOMContentLoaded", function() {
+  const editButton = document.getElementById("editButton");
+  if (editButton) {
+    editButton.addEventListener("click", () => showModal('galleryModal'));
+  } else {
+    console.error("Élément avec l'ID 'editButton' non trouvé");
+  }
 
+  const addPictureBtn = document.getElementById("addPictureBtn");
+  if (addPictureBtn) {
+    addPictureBtn.addEventListener("click", () => showModal('addPictureModal'));
+  } else {
+    console.error("Élément avec l'ID 'addPictureBtn' non trouvé");
+  }
+
+  // Ajouter des écouteurs d'événements pour fermer les modales
+  document.querySelectorAll(".fa-xmark").forEach((el) => {
+    el.addEventListener("click", closeModal);
+  });
+
+  // Fermer les modales lorsque l'utilisateur clique en dehors
+  document.querySelectorAll('.modal').forEach(modal => {
+    modal.addEventListener('click', closeModal);
+  });
+
+  // Ajouter des écouteurs pour les boutons de suppression d'image
+  document.getElementById('galleryImages').addEventListener('click', deleteImage);
+});
