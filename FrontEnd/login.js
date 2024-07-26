@@ -1,4 +1,18 @@
-const baseApiUrl = "http://localhost:5500/api/";  // Définition de l'URL de base de l'API
+const baseApiUrl = "http://localhost:5678/api/";  // Définition de l'URL de base de l'API
+const loginBtn = document.getElementById("btnlogin");  // Corriger la déclaration du bouton de connexion
+console.log(loginBtn);
+
+function checkLoginStatus() {
+  let token = localStorage.getItem("token");
+  if (token) {
+    loginBtn.textContent = "Logout";
+  } else {
+    loginBtn.textContent = "Login";
+  }
+}
+
+// Appel de la fonction pour définir l'état initial du bouton
+checkLoginStatus();
 
 document.addEventListener("submit", (e) => {
   e.preventDefault();  // Empêche le rechargement de la page lors de la soumission du formulaire
@@ -23,9 +37,11 @@ document.addEventListener("submit", (e) => {
       alert("Email ou mot de passe erronés");  // Affiche une alerte si le statut de la réponse n'est pas 200
     } else {
       response.json().then((data) => {
-        sessionStorage.setItem("token", data.token);  // Stocke le token dans le sessionStorage
-        window.location.replace("index.html");  // Redirige vers la page "index.html"
+        localStorage.setItem("token", data.token);  // Stocke le token dans le sessionStorage
+        loginBtn.textContent = "Logout"; //va changer le bouton login en logout
+        window.location.href="index.html";  // Redirige vers la page "index.html"
       });
     }
   });
 });
+

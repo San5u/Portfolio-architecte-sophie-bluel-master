@@ -47,6 +47,11 @@ table {
 	border-spacing: 0;
 }
 /** end reset css**/
+
+html {
+    scroll-behavior: smooth; /* Ajoute un défilement en douceur pour les ancres */
+}
+
 html {
 	background: #FFFEF8;
 }
@@ -67,6 +72,7 @@ section {
 	margin: 50px 0
 }
 
+
 h1{
 	display: flex;
 	flex-direction: column;
@@ -80,7 +86,7 @@ h1 > span {
 	font-family: 'Work Sans';
 	font-size:10px;
 	letter-spacing: 0.1em;
-;
+
 }
 
 h2{
@@ -89,6 +95,30 @@ h2{
 	font-size: 30px;
 	color: #1D6154
 }
+
+section {
+	margin: 50px 0
+}
+footer {
+
+	background-color: white;
+	bottom: 0;
+width: 1440px;
+height: 60px;
+left: 0px;
+top: 964px;
+}
+
+img {
+width: 22px;
+height: auto;
+border: 5px 
+}
+
+
+
+
+
 
 button, input[type="submit"] {
 	cursor: pointer;
@@ -106,7 +136,7 @@ nav ul {
 	list-style-type: none;
 
 }
-nav li {
+header li {
 	
 	padding: 0 10px;
 	font-size: 1.2em;
@@ -185,6 +215,8 @@ margin: auto;
 #contact textarea {
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	padding: 10px;
+	box-sizing: border-box;
 }
 
 input[type="submit"]{
@@ -213,6 +245,12 @@ footer nav ul {
 	margin: auto;
 }
 
+li a {
+text-decoration: none;
+
+}
+
+
 #contact, #login > * {
 	text-align: center;
 
@@ -236,15 +274,10 @@ footer nav ul {
 #contact label, #login label {
 	margin: 2em 0 1em 0;
 }
-#contact textarea {
-	border: none;
-	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
-	padding: 10px;
-	box-sizing: border-box;
-}
+
 
 #login a {
-	text-decoration: underline;
+text-decoration: underline;
 font-family: 'Work Sans';
 font-style: normal;
 font-weight: 600;
@@ -255,14 +288,98 @@ color: #3D3D3D;;
 	margin-top: 50px;
 	margin-bottom: 50px;
 }
-footer nav ul {
-	display: flex;
-	justify-content: flex-end;
-	margin: 2em
+
+
+
+/***** MODALE ******/
+
+
+.modal {
+	display: none; /* Masquer par défaut */
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5); /* Fond sombre */
+	z-index: 1000; /* Assurez-vous qu'il est au-dessus des autres éléments */
+  }
+  
+  .modal.visible {
+	display: block; /* Afficher lorsque la classe 'visible' est ajoutée */
+  }
+  
+  .modalWrapper {
+	position: relative;
+	margin: 15% auto;
+	padding: 20px;
+	background: white;
+	width: 50%;
+	max-width: 500px;
+  }
+  
+  .modalHeader i {
+	cursor: pointer;
+  }
+  
+  #galleryImages figure {
+	display: inline-block;
+	margin: 10px;
+	position: relative;
+  }
+  
+  .deleteImageBtn {
+	position: absolute;
+	top: 0;
+	right: 0;
+	background: transparent;
+	border: none;
+	cursor: pointer;
+  }
+  
+  .deleteImageBtn i {
+	color: red;
+  }
+  
+
+  /** bouton modifier **/
+
+
+/* Conteneur principal de la section portfolio */
+#portfolio {
+    padding: 50px; /* Ajustez selon vos besoins */
 }
 
+/* Conteneur pour le titre et le bouton Modifier */
+.portfolio-container {
+	display: flex;
+    justify-content: center; /* Centre le titre */
+    align-items: center; /* Aligne verticalement le titre et le bouton Modifier */
+    position: relative; 
+}
 
-/* Mot de passe oublié */
+/* Style pour le titre "Mes Projets" */
+.portfolio-title {
+    margin: 0; /* Supprime les marges par défaut */
+	margin-right: 10px;
+}
 
+/* Style pour le texte Modifier avec l'icône */
+.edit-button {
+    display: flex;
+    align-items: center;
+    cursor: pointer; /* Ajoute un effet de curseur pointer pour indiquer qu'il s'agit d'un élément cliquable */
+    color: #1D6154; /* Couleur du texte, changez-la selon la couleur de "Mes Projets" */
+	margin-top: -25px;
+}
 
+.edit-button i {
+    margin-right: 5px; /* Espace entre l'icône et le texte */
+    font-size: 1.2em; /* Taille de l'icône */
+	
+}
 
+#editButton {
+    font-size: 1em; /* Taille de la police du texte "Modifier" */
+    font-weight: 700; /* Poids de la police du texte, modifiez si nécessaire */
+}
