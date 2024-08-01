@@ -316,12 +316,36 @@ color: #3D3D3D;;
 	background: white;
 	width: 50%;
 	max-width: 500px;
+	 border-radius: 10px;
   }
+
+  .modalTitle {
+	font-size: 26px;
+	margin-bottom: 47px;
+}
   
   .modalHeader i {
 	cursor: pointer;
   }
+
+ 
+  .modalheader {
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+	justify-content: flex-end;
+}
   
+H3.modalTitle {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: stretch;
+	align-content: stretch;
+	
+}
+
   #galleryImages figure {
 	display: inline-block;
 	margin: 10px;
@@ -338,9 +362,39 @@ color: #3D3D3D;;
   }
   
   .deleteImageBtn i {
-	color: red;
+	color: white;
+	background-color: #1D6154;
+padding: 5px;
+border-radius: 2px;
+
+
+
+
+
   }
   
+
+  /*bouton Ajouter une photo */
+
+#addPictureBtn {
+    font-family: 'Syne';
+    font-weight: 700;
+    color: white;
+    background-color: #1D6154; 
+    border-radius: 60px; 
+    border: none; 
+	width: 237px;
+    padding: 10px 20px; 
+    font-size: 1em; 
+    text-align: center; 
+    margin: 20px 0; 
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: center;
+	align-content: stretch;
+}
 
   /** bouton modifier **/
 
@@ -383,3 +437,4 @@ color: #3D3D3D;;
     font-size: 1em; /* Taille de la police du texte "Modifier" */
     font-weight: 700; /* Poids de la police du texte, modifiez si nécessaire */
 }
+

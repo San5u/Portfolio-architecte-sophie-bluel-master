@@ -75,7 +75,7 @@ const loadGalleryImages = () => {
   // Effacer les images précédentes
   galleryImages.innerHTML = '';
 
-  // Exemple de données d'images (à remplacer par les données réelles)
+  //  données d'images 
   const images = [
     { src: 'assets/images/abajour-tahina.png', title: 'Abajour Tahina' },
     { src: 'assets/images/appartement-paris-v.png', title: 'Appartement Paris V' },
@@ -100,7 +100,7 @@ const loadGalleryImages = () => {
     figcaption.textContent = image.title;
     const deleteBtn = document.createElement('button');
     deleteBtn.className = 'deleteImageBtn';
-    deleteBtn.innerHTML = '<i class="fa fa-trash"></i>';
+    deleteBtn.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
 
     figure.appendChild(img);
     figure.appendChild(figcaption);
