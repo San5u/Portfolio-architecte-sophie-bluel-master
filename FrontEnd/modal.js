@@ -29,7 +29,9 @@ const closeModal = function (e) {
 
 // Fonction pour gérer la suppression d'image
 const deleteImage = (e) => {
+
   if (e.target.closest('.deleteImageBtn')) {
+    alert( "bonjour")
     e.target.closest('figure').remove(); // Supprimer l'image du DOM
   }
 };
@@ -59,6 +61,7 @@ if (addPictureBtn) {
   // Ajouter des écouteurs pour les boutons de suppression d'image
   document.getElementById('galleryImages').addEventListener('click', deleteImage);
 
+
   // Prévisualiser l'image avant de l'ajouter
   const photoInput = document.getElementById("photo");
   photoInput.addEventListener("change", function() {
@@ -87,6 +90,7 @@ const loadGalleryImages = () => {
   // Effacer les images précédentes
   galleryImages.innerHTML = '';
 
+  
   //  données d'images 
   const images = [
     { src: 'assets/images/abajour-tahina.png' },
