@@ -109,8 +109,8 @@ left: 0px;
 top: 964px;
 }
 
-img {
-width: 22px;
+figure img {
+width: 76.86px;
 height: auto;
 border: 5px 
 }
@@ -310,18 +310,25 @@ color: #3D3D3D;;
   }
   
   .modalWrapper {
-	position: relative;
-	margin: 15% auto;
+	position: relative; 
+  
 	padding: 20px;
 	background: white;
-	width: 50%;
-	max-width: 500px;
 	 border-radius: 10px;
+	 width: 590px;
+	 height: 650px;
+	 margin-left:606px;
+	 margin-top: 98px;
+	 
+
   }
 
   .modalTitle {
 	font-size: 26px;
+	
 	margin-bottom: 47px;
+	position: relative;
+	top: 5px;
 }
   
   .modalHeader i {
@@ -348,55 +355,92 @@ H3.modalTitle {
 
   #galleryImages figure {
 	display: inline-block;
-	margin: 10px;
+	margin: 4px;
 	position: relative;
+	padding-bottom: 20px;
+	
+  }
+
+  #galleryImages{
+	
+	padding-left : 80px;
+	
+	width: 80%;
+	
+	
   }
   
   .deleteImageBtn {
 	position: absolute;
-	top: 0;
+	top: -5px;
 	right: 0;
 	background: transparent;
 	border: none;
 	cursor: pointer;
+	
   }
   
   .deleteImageBtn i {
 	color: white;
-	background-color: #1D6154;
-padding: 5px;
+	background-color: #000000;
+padding: 3px;
 border-radius: 2px;
 
-
-
-
-
   }
+  .fa-solid.fa-xmark{
+	
+		background: none; 
+		border: none;    
+		color: black;    
+		font-size: 22px;  
+		cursor: pointer;  
+		padding: 0;      
+		margin: 0;      
+		
+		
+	}
+
   
+
+  
+.fa-solid.fa-trash-can{
+	font-size: x-small;
+}
+
+
+.separateur {
+    height: 1px;
+    background-color: #B3B3B3;
+    margin: 20px 0;
+	width: 66%;
+	position: absolute;
+	left: 105px;
+	bottom: 98px;
+}
+
 
   /*bouton Ajouter une photo */
 
 #addPictureBtn {
     font-family: 'Syne';
-    font-weight: 700;
+    font-weight: 500;
     color: white;
     background-color: #1D6154; 
     border-radius: 60px; 
     border: none; 
 	width: 237px;
+	height: 36px;
     padding: 10px 20px; 
     font-size: 1em; 
     text-align: center; 
     margin: 20px 0; 
-	display: flex;
-	flex-direction: row;
-	flex-wrap: nowrap;
-	justify-content: center;
-	align-items: center;
-	align-content: stretch;
+	position: absolute;
+	right: 200px;
+	left: 195px;
+	top: 590px;
 }
 
-  /** bouton modifier **/
+ 
 
 
 /* Conteneur principal de la section portfolio */
@@ -438,3 +482,17 @@ border-radius: 2px;
     font-weight: 700; /* Poids de la police du texte, modifiez si nécessaire */
 }
 
+#labelPhoto {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	height: 200px;
+	background-color: #E8F1F6;
+	border-radius: 3px;
+	margin-bottom: 30px;
+	text-align: center;
+	width: 100%;
+	padding-top: 25px;
+	position: relative;
+	box-sizing: border-box;
+}

@@ -77,17 +77,17 @@ const loadGalleryImages = () => {
 
   //  données d'images 
   const images = [
-    { src: 'assets/images/abajour-tahina.png', title: 'Abajour Tahina' },
-    { src: 'assets/images/appartement-paris-v.png', title: 'Appartement Paris V' },
-    { src: 'assets/images/restaurant-sushisen-londres.png', title: 'Restaurant Sushisen - Londres' },
-    { src: 'assets/images/la-balisiere.png', title: 'Villa “La Balisiere” - Port Louis' },
-    { src: 'assets/images/structures-thermopolis.png', title: 'Structures Thermopolis' },
-    { src: 'assets/images/appartement-paris-x.png', title: 'Appartement Paris X' },
-    { src: 'assets/images/le-coteau-cassis.png', title: 'Pavillon “Le coteau” - Cassis' },
-    { src: 'assets/images/villa-ferneze.png', title: 'Villa Ferneze - Isola d’Elba' },
-    { src: 'assets/images/appartement-paris-xviii.png', title: 'Appartement Paris XVIII' },
-    { src: 'assets/images/bar-lullaby-paris.png', title: 'Bar “Lullaby” - Paris' },
-    { src: 'assets/images/hotel-first-arte-new-delhi.png', title: 'Hotel First Arte - New Delhi' }
+    { src: 'assets/images/abajour-tahina.png' },
+    { src: 'assets/images/appartement-paris-v.png' },
+    { src: 'assets/images/restaurant-sushisen-londres.png' },
+    { src: 'assets/images/la-balisiere.png'},
+    { src: 'assets/images/structures-thermopolis.png'},
+    { src: 'assets/images/appartement-paris-x.png'},
+    { src: 'assets/images/villa-ferneze.png', },
+    { src: 'assets/images/appartement-paris-xviii.png'},
+    { src: 'assets/images/le-coteau-cassis.png'},
+    { src: 'assets/images/bar-lullaby-paris.png' },
+    { src: 'assets/images/hotel-first-arte-new-delhi.png' }
   ];
 
   // Ajouter les images à la modale
