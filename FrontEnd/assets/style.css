@@ -225,7 +225,7 @@ input[type="submit"]{
 	color: white;
 	background-color: #1D6154;
 	margin : 2em auto ;
-	width: 180px;
+	width: 237px;
 	text-align: center;
 	border-radius: 60px ;
 	font-size: 1,2em;
@@ -270,6 +270,7 @@ text-decoration: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 	padding: 10px;
 	box-sizing: border-box;
+	width: 60%;
 }
 #contact label, #login label {
 	margin: 2em 0 1em 0;
@@ -400,6 +401,12 @@ border-radius: 2px;
 		
 	}
 
+	.fa-regular.fa-image{
+	color: rgb(199, 199, 199);
+	font-size: 76px;
+	
+
+	}
   
 
   
@@ -491,8 +498,72 @@ border-radius: 2px;
 	border-radius: 3px;
 	margin-bottom: 30px;
 	text-align: center;
-	width: 100%;
+	width: 70%;
 	padding-top: 25px;
 	position: relative;
 	box-sizing: border-box;
+	margin-left: 85px;
+}
+
+#labelPhoto p {
+
+	font-size: smaller;
+}
+.TitreCategorie{
+	
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	align-items: stretch;
+	align-content: stretch;
+
+}
+
+.custom-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #b8b8b8d2;
+    color: rgb(16, 86, 114);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+	margin-bottom: 10px;
+}
+
+#labelPhoto {
+    text-align: center;
+    position: relative;
+}
+
+#picturePreview {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+   
+}
+
+#picturePreviewImg {
+    max-width: 100%;
+    height: auto;
+    display: none; 
+	position: absolute;
+	top: 0px;
+}
+
+.modalContent #valider {
+    background-color: #1D6154; /*bouton desac en gris */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    
+}
+
+#valider.enabled {
+    background-color: #3D3D3D; /* bouton est activé */
+    cursor: pointer; /* Curseur pour bouton cliquable */
 }

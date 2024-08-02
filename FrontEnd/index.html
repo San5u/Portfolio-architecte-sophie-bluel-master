@@ -54,28 +54,34 @@
                 <form id="addPictureForm" name="addPictureForm">
                     <!-- Zone pour sélectionner une photo -->
                     <div id="labelPhoto">
-                        <img src="./assets/icons/picture.png" id="picture" alt="choisir une image">
-                        <label for="photo" id="browsePictures">+ Ajouter photo</label>
-                        <p>jpg, png : 4mo max</p>
+                        <i class="fa-regular fa-image"></i>
+                           <!-- Champ pour sélectionner un fichier image, masqué -->
+                            <input type="file" class="photo" name="photo" id="photo" accept="image/png, image/jpeg" required style="display: none;">
+                            <!-- Label stylisé pour agir comme un bouton -->
+                            <label for="photo" id="browsePictures" class="custom-button">+ Ajouter photo</label>
+                            <p>jpg, png : 4mo max</p>
+
+                             <!-- Zone d'aperçu de l'image sélectionnée -->
+                        <div id="picturePreview">
+                            <img src="#" alt="votre image" id="picturePreviewImg">
+                        </div>
                     </div>
-                    <!-- Zone d'aperçu de l'image sélectionnée -->
-                    <div id="picturePreview">
-                        <img src="#" alt="votre image" id="picturePreviewImg">
+                   
+                   <div class="TitreCategorie">
+                        <!-- Champ pour entrer le titre de la photo -->
+                        <label for="title">Titre</label>
+                        <input type="text" id="title" name="title" required>
+                        <!-- Champ pour sélectionner la catégorie de la photo -->
+                        <label for="selectCategory">Catégorie</label>
+                        <select id="selectCategory" name="selectCategory">
                     </div>
-                    <!-- Champ pour sélectionner un fichier image -->
-                    <input type="file" class="photo" name="photo" id="photo" accept="image/png, image/jpeg" required>
-                    <!-- Champ pour entrer le titre de la photo -->
-                    <label for="title">Titre</label>
-                    <input type="text" id="title" name="title" required>
-                    <!-- Champ pour sélectionner la catégorie de la photo -->
-                    <label for="selectCategory">Catégorie</label>
-                    <select id="selectCategory" name="selectCategory">
                         <!-- Les options de catégories sont ajoutées ici -->
                     </select>
                 </form>
             </div>
             <!-- Bouton pour valider l'ajout de la photo -->
-            <input type="submit" id="valider" value="valider">
+            
+            <input type="submit" id="valider" value="Valider" disabled>
         </div>
     </aside>
 

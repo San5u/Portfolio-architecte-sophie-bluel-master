@@ -35,34 +35,46 @@ const deleteImage = (e) => {
 };
 
 // Ajouter des écouteurs d'événements pour les boutons
-document.addEventListener("DOMContentLoaded", function() {
-  const editButton = document.getElementById("editButton");
-  if (editButton) {
+const editButton = document.getElementById("editButton");
+if (editButton) {
     editButton.addEventListener("click", () => showModal('galleryModal'));
-  } else {
+} else {
     console.error("Élément avec l'ID 'editButton' non trouvé");
-  }
+}
 
-  const addPictureBtn = document.getElementById("addPictureBtn");
-  if (addPictureBtn) {
+const addPictureBtn = document.getElementById("addPictureBtn");
+if (addPictureBtn) {
     addPictureBtn.addEventListener("click", () => showModal('addPictureModal'));
-  } else {
+} else {
     console.error("Élément avec l'ID 'addPictureBtn' non trouvé");
-  }
+}
 
   // Ajouter des écouteurs d'événements pour fermer les modales
   document.querySelectorAll(".fa-xmark").forEach((el) => {
     el.addEventListener("click", closeModal);
   });
 
-  // Fermer les modales lorsque l'utilisateur clique en dehors
-  document.querySelectorAll('.modal').forEach(modal => {
-    modal.addEventListener('click', closeModal);
-  });
+
 
   // Ajouter des écouteurs pour les boutons de suppression d'image
   document.getElementById('galleryImages').addEventListener('click', deleteImage);
-});
+
+  // Prévisualiser l'image avant de l'ajouter
+  const photoInput = document.getElementById("photo");
+  photoInput.addEventListener("change", function() {
+    const file = this.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const previewImg = document.getElementById("picturePreviewImg");
+        previewImg.src = e.target.result;
+        previewImg.style.display = "block";
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+
+
 
 // Fonction pour charger les images de la galerie dans la modale
 const loadGalleryImages = () => {
