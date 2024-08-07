@@ -10,10 +10,10 @@ const showModal = (modalId) => {
   if (modal) {
     modal.classList.add('visible');
 
-    // Charger les images de la galerie si on ouvre la modale de la galerie
-    if (modalId === 'galleryModal') {
-      loadGalleryImages();
-    }
+   // Charger les images de la galerie si on ouvre la modale de la galerie
+if (modalId === 'galleryModal') {
+  loadGalleryImagesFromApi(); 
+}
   } else {
     console.error("Modale non trouvée avec l'ID:", modalId);
   }
@@ -29,38 +29,56 @@ const closeModal = function (e) {
 
 // Fonction pour gérer la suppression d'image
 const deleteImage = (e) => {
-
   if (e.target.closest('.deleteImageBtn')) {
-    alert( "bonjour")
-    e.target.closest('figure').remove(); // Supprimer l'image du DOM
+    const button = e.target.closest('.deleteImageBtn');
+    const imageId = button.dataset.id;
+
+    // Supprimer l'image de la galerie dans la modale
+    const galleryImages = document.getElementById('galleryImages');
+    const imageToRemove = Array.from(galleryImages.getElementsByTagName('figure')).find(f => f.querySelector('.deleteImageBtn').dataset.id === imageId);
+    if (imageToRemove) {
+      imageToRemove.remove();
+    }
+
+    // Supprimer l'image de la galerie principale
+    const mainGallery = document.querySelector('.gallery');
+    const imageInMainGallery = Array.from(mainGallery.getElementsByTagName('figure')).find(f => f.querySelector('.deleteImageBtn').dataset.id === imageId);
+    if (imageInMainGallery) {
+      imageInMainGallery.remove();
+    }
   }
 };
 
 // Ajouter des écouteurs d'événements pour les boutons
-const editButton = document.getElementById("editButton");
-if (editButton) {
+document.addEventListener("DOMContentLoaded", function() {
+  const editButton = document.getElementById("editButton");
+  if (editButton) {
     editButton.addEventListener("click", () => showModal('galleryModal'));
-} else {
+  } else {
     console.error("Élément avec l'ID 'editButton' non trouvé");
-}
+  }
 
-const addPictureBtn = document.getElementById("addPictureBtn");
-if (addPictureBtn) {
+  const addPictureBtn = document.getElementById("addPictureBtn");
+  if (addPictureBtn) {
     addPictureBtn.addEventListener("click", () => showModal('addPictureModal'));
-} else {
+  } else {
     console.error("Élément avec l'ID 'addPictureBtn' non trouvé");
-}
+  }
 
-  // Ajouter des écouteurs d'événements pour fermer les modales
-  document.querySelectorAll(".fa-xmark").forEach((el) => {
-    el.addEventListener("click", closeModal);
-  });
 
+ // Ajouter des écouteurs d'événements pour fermer les modales
+ document.querySelectorAll(".fa-xmark").forEach((el) => {
+  el.addEventListener("click", closeModal);
+});
 
 
   // Ajouter des écouteurs pour les boutons de suppression d'image
   document.getElementById('galleryImages').addEventListener('click', deleteImage);
+  document.querySelector('.gallery').addEventListener('click', deleteImage);
 
+  // Charger dynamiquement les images à partir de l'API
+  loadGalleryImagesFromApi(); 
+});
 
   // Prévisualiser l'image avant de l'ajouter
   const photoInput = document.getElementById("photo");
@@ -77,50 +95,47 @@ if (addPictureBtn) {
     }
   });
 
-
-
-// Fonction pour charger les images de la galerie dans la modale
-const loadGalleryImages = () => {
-  const galleryImages = document.getElementById('galleryImages');
-  if (!galleryImages) {
-    console.error("Élément avec l'ID 'galleryImages' non trouvé");
-    return;
-  }
-
-  // Effacer les images précédentes
-  galleryImages.innerHTML = '';
-
+  const loadGalleryImagesFromApi = async () => {
+    try {
+      const response = await fetch("http://localhost:5678/api/works"); 
   
-  //  données d'images 
-  const images = [
-    { src: 'assets/images/abajour-tahina.png' },
-    { src: 'assets/images/appartement-paris-v.png' },
-    { src: 'assets/images/restaurant-sushisen-londres.png' },
-    { src: 'assets/images/la-balisiere.png'},
-    { src: 'assets/images/structures-thermopolis.png'},
-    { src: 'assets/images/appartement-paris-x.png'},
-    { src: 'assets/images/villa-ferneze.png', },
-    { src: 'assets/images/appartement-paris-xviii.png'},
-    { src: 'assets/images/le-coteau-cassis.png'},
-    { src: 'assets/images/bar-lullaby-paris.png' },
-    { src: 'assets/images/hotel-first-arte-new-delhi.png' }
-  ];
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const images = await response.json();
+  
+      const galleryImages = document.getElementById('galleryImages');
+      galleryImages.innerHTML = ''; 
+  
+      const mainGallery = document.querySelector('.gallery');
+      mainGallery.innerHTML = ''; 
 
-  // Ajouter les images à la modale
-  images.forEach(image => {
-    const figure = document.createElement('figure');
-    const img = document.createElement('img');
-    img.src = image.src;
-    img.alt = image.title;
-    const figcaption = document.createElement('figcaption');
-    figcaption.textContent = image.title;
-    const deleteBtn = document.createElement('button');
-    deleteBtn.className = 'deleteImageBtn';
-    deleteBtn.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
+      images.forEach(image => {
+        const figure = document.createElement('figure');
+        const img = document.createElement('img');
+        img.src = image.imageUrl; 
+        img.alt = image.title ||  'Image'; 
 
-    figure.appendChild(img);
-    figure.appendChild(figcaption);
-    figure.appendChild(deleteBtn);
-    galleryImages.appendChild(figure);
-  });
-};
+        const figcaption = document.createElement('figcaption');
+        figcaption.textContent = image.title || 'Image'; 
+
+        const deleteBtn = document.createElement('button');
+        deleteBtn.className = 'deleteImageBtn';
+        deleteBtn.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
+        deleteBtn.dataset.id = image.id; 
+  
+        figure.appendChild(img);
+        figure.appendChild(figcaption);
+        figure.appendChild(deleteBtn);
+        galleryImages.appendChild(figure);
+  
+ // Ajouter les images aussi dans la galerie principale si besoin
+ const mainGallery = document.querySelector('.gallery');
+ const figureMain = figure.cloneNode(true);
+ mainGallery.appendChild(figureMain);
+});
+
+    } catch (error) {
+      console.error('Error fetching images:', error);
+    }
+  };

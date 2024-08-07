@@ -270,7 +270,7 @@ text-decoration: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 	padding: 10px;
 	box-sizing: border-box;
-	width: 60%;
+	
 }
 #contact label, #login label {
 	margin: 2em 0 1em 0;
@@ -564,7 +564,13 @@ border-radius: 2px;
     
 }
 
+
+#valider:disabled {
+    background-color: grey; /* Couleur du bouton désactivé */
+    cursor: not-allowed;
+}
+
 #valider.enabled {
-    background-color: #3D3D3D; /* bouton est activé */
-    cursor: pointer; /* Curseur pour bouton cliquable */
+    background-color: #3D3D3D; /* Couleur du bouton activé */
+    cursor: pointer; 
 }
