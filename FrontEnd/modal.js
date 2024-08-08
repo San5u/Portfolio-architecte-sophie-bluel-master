@@ -33,6 +33,9 @@ const deleteImage = (e) => {
     const button = e.target.closest('.deleteImageBtn');
     const imageId = button.dataset.id;
 
+    // ALERT click sur poubelle avec ID
+    alert(`Vous avez cliqué sur l'image avec l'ID : ${imageId}`);
+
     // Supprimer l'image de la galerie dans la modale
     const galleryImages = document.getElementById('galleryImages');
     const imageToRemove = Array.from(galleryImages.getElementsByTagName('figure')).find(f => f.querySelector('.deleteImageBtn').dataset.id === imageId);
