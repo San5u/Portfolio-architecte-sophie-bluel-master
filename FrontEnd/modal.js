@@ -83,20 +83,7 @@ document.addEventListener("DOMContentLoaded", function() {
   loadGalleryImagesFromApi(); 
 });
 
-  // Prévisualiser l'image avant de l'ajouter
-  const photoInput = document.getElementById("photo");
-  photoInput.addEventListener("change", function() {
-    const file = this.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        const previewImg = document.getElementById("picturePreviewImg");
-        previewImg.src = e.target.result;
-        previewImg.style.display = "block";
-      };
-      reader.readAsDataURL(file);
-    }
-  });
+ 
 
   const loadGalleryImagesFromApi = async () => {
     try {
@@ -128,7 +115,6 @@ document.addEventListener("DOMContentLoaded", function() {
         deleteBtn.dataset.id = image.id; 
   
         figure.appendChild(img);
-        figure.appendChild(figcaption);
         figure.appendChild(deleteBtn);
         galleryImages.appendChild(figure);
   
@@ -142,3 +128,84 @@ document.addEventListener("DOMContentLoaded", function() {
       console.error('Error fetching images:', error);
     }
   };
+
+  //            DEUXIEME PAGE MODALE
+  
+
+ 
+
+// Fonction pour activer/désactiver le bouton "V alider"
+const updateValidateButtonState = () => {
+  const photoInput = document.getElementById("photo").files.length > 0;
+  const titleInput = document.getElementById("title").value.trim() !== "";
+  const categoryInput = document.getElementById("selectCategory").value !== "";
+
+  const validateButton = document.getElementById("valider");
+
+ // Activer le bouton si tous les champs sont remplis
+ validateButton.disabled = !(photoInput && titleInput && categoryInput);
+};
+
+ // Prévisualiser l'image avant de l'ajouter et mettre à jour l'état du bouton "Valider"
+const photoInput = document.getElementById("photo");
+photoInput.addEventListener("change", function() {
+    const file = this.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const previewImg = document.getElementById("picturePreviewImg");
+            previewImg.src = e.target.result;
+            previewImg.style.display = "block";
+
+            updateValidateButtonState(); 
+        };
+        reader.readAsDataURL(file);
+    }
+});
+
+// Écouter les changements dans les autres champs
+
+document.getElementById("title").addEventListener("input", updateValidateButtonState);
+document.getElementById("selectCategory").addEventListener("change", updateValidateButtonState);
+
+const loadCategories = async () => {
+  try {
+      const response = await fetch("http://localhost:5678/api/categories");
+      if (!response.ok) {
+          throw new Error(`Erreur HTTP ! Statut : ${response.status}`);
+      }
+      const categories = await response.json();
+
+      const categorySelect = document.getElementById("selectCategory");
+      categorySelect.innerHTML = '<option value="" disabled selected>Choisissez une catégorie</option>'; 
+
+      categories.forEach(category => {
+          const option = document.createElement("option");
+          option.value = category.id; 
+          option.textContent = category.name; 
+          categorySelect.appendChild(option);
+      });
+  } catch (error) {
+      console.error("Erreur lors du chargement des catégories :", error);
+  }
+};
+
+// appel fonction quand c'est chargé
+document.addEventListener("DOMContentLoaded", loadCategories);
+
+
+// les boutons en haut de la deuxieme modale 
+
+document.addEventListener("DOMContentLoaded", function() {
+  // Bouton pour revenir à la modale précédente
+  document.getElementById("backToPreviousModal").addEventListener("click", function() {
+      
+      showModal('firstModal');
+  });
+
+  // Bouton de fermeture de la modale
+  document.querySelector(".modalCloseButton").addEventListener("click", function() {
+      
+      closeModal();
+  });
+});
