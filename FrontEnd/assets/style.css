@@ -61,7 +61,6 @@ body {
 	margin:auto;
 	font-family: 'Work Sans' ;
 	font-size: 14px;
-	padding-bottom: 60px;
 }
 header {
 	display: flex;
@@ -99,15 +98,7 @@ h2{
 section {
 	margin: 50px 0
 }
-footer {
 
-	background-color: white;
-	bottom: 0;
-width: 1440px;
-height: 60px;
-left: 0px;
-top: 964px;
-}
 
 figure img {
 width: 76.86px;
@@ -116,7 +107,9 @@ border: 5px
 }
 
 
-
+.fa-instagram {
+    font-size: 24px; /* Taille de l'icône en pixels */
+}
 
 
 
@@ -234,10 +227,15 @@ input[type="submit"]{
 	display: block;
 }
 
-footer nav ul {
+footer{
+	background-color: white;
+	padding: 2px;
+}
+
+footer nav {
 	display: flex;
 	justify-content: flex-end;
-	margin: 2em
+	margin: 2em;
 }
 
 #contact, #login {
@@ -584,4 +582,30 @@ border-radius: 2px;
 	cursor: pointer; 
 	background: none;
 	border: none; 
+}
+
+
+.categorie {
+	display: flex;
+	justify-content: center;
+	
+}
+
+.categorie button {
+	
+	font-family: 'Syne';
+	font-weight: bold;
+	color: #1D6154;
+	font-size: 15px;
+    border: 1px solid #1D6154;
+    border-radius: 50px;
+    padding:10px 20px;
+    margin: 20px 5px 50px 5px;
+	background-color: rgb(250, 247, 240);	
+	cursor: pointer;
+}
+
+.categorie button:hover {
+	background-color: #1D6154;
+	color: white;
 }
