@@ -1,4 +1,4 @@
-// Fonction pour afficher une modale spécifique
+// Fonction affichage modal
 const showModal = (modalId) => {
   // Cacher toutes les modales
   document.querySelectorAll('.modal').forEach(modal => {
@@ -9,7 +9,7 @@ const showModal = (modalId) => {
   if (modal) {
     modal.classList.add('visible');
 
-    // Charger les images de la galerie si on ouvre la modale de la galerie
+    // Charger images galerie si modal galerie
     if (modalId === 'galleryModal') {
       loadGalleryImagesFromApi();
     }
@@ -18,7 +18,7 @@ const showModal = (modalId) => {
   }
 };
 
-// Fonction pour fermer les modales
+// Fonction fermer modales
 const closeModal = (e) => {
   const modal = e.target.closest('.modal');
   if (modal) {
@@ -26,7 +26,7 @@ const closeModal = (e) => {
   }
 };
 
-// Fonction pour gérer la suppression d'image
+// Fonction suppression image
 const deleteImage = async (e) => {
   if (e.target.closest('.deleteImageBtn')) {
     const button = e.target.closest('.deleteImageBtn');
@@ -46,7 +46,7 @@ const deleteImage = async (e) => {
         throw new Error(`Erreur HTTP ! Statut : ${response.status}`);
       }
 
-      // Supprimer l'image de la galerie dans la modale
+      // Supprimer image de la galerie dans modal
       const galleryImages = document.getElementById('galleryImages');
       const imageToRemove = Array.from(galleryImages.getElementsByTagName('figure'))
         .find(f => f.querySelector('.deleteImageBtn').dataset.id === imageId);
@@ -54,7 +54,7 @@ const deleteImage = async (e) => {
         imageToRemove.remove();
       }
 
-      // Supprimer l'image de la galerie principale
+      // Supprimer image de la galerie principale
       const mainGallery = document.querySelector('.gallery');
       const imageInMainGallery = Array.from(mainGallery.getElementsByTagName('figure'))
         .find(f => f.querySelector('.deleteImageBtn') && f.querySelector('.deleteImageBtn').dataset.id === imageId);
@@ -67,7 +67,7 @@ const deleteImage = async (e) => {
   }
 };
 
-// Fonction pour activer/désactiver le bouton "Valider"
+// Fonction activer/désactiver bouton "Valider"
 const updateValidateButtonState = () => {
   const photoInput = document.getElementById("photo").files.length > 0;
   const titleInput = document.getElementById("title").value.trim() !== "";
@@ -77,7 +77,7 @@ const updateValidateButtonState = () => {
   validateButton.disabled = !(photoInput && titleInput && categoryInput);
 };
 
-// Prévisualiser l'image avant de l'ajouter et mettre à jour l'état du bouton "Valider"
+// Prévisualisation image avant ajout et mise à jour état bouton "Valider"
 const photoInput = document.getElementById("photo");
 photoInput.addEventListener("change", () => {
   const file = photoInput.files[0];
@@ -93,7 +93,7 @@ photoInput.addEventListener("change", () => {
   }
 });
 
-// Écouter les changements dans les autres champs
+// Écouter changements dans autres champs
 document.getElementById("title").addEventListener("input", updateValidateButtonState);
 document.getElementById("selectCategory").addEventListener("change", updateValidateButtonState);
 
@@ -119,7 +119,7 @@ const loadCategories = async () => {
   }
 };
 
-// Charger les images de la galerie depuis l'API
+// Charger images galerie depuis API
 const loadGalleryImagesFromApi = async () => {
   try {
     const response = await fetch("http://localhost:5678/api/works");
@@ -153,7 +153,7 @@ const loadGalleryImagesFromApi = async () => {
       figure.appendChild(deleteBtn);
       galleryImages.appendChild(figure);
 
-      // Ajouter les images aussi dans la galerie principale sans le bouton de suppression
+      // Ajouter images aussi dans galerie principale sans bouton suppression
       const figureMain = document.createElement('figure');
       figureMain.appendChild(img.cloneNode(true));
       figureMain.appendChild(figcaption.cloneNode(true));
@@ -164,13 +164,13 @@ const loadGalleryImagesFromApi = async () => {
   }
 };
 
-// Fonction pour vérifier le statut de connexion
+// Fonction vérifier statut connexion
 function checkLoginStatus() {
   const token = localStorage.getItem('token');
-  return !!token; // Retourne vrai si un token est présent, sinon faux
+  return !!token; // Retourne vrai si token présent, sinon faux
 }
 
-// Fonction pour mettre à jour le bouton d'authentification et gérer la déconnexion
+// Fonction mettre à jour bouton auth et gérer déconnexion
 function updateAuthButton(authBtn) {
   const isLoggedIn = checkLoginStatus();
   if (isLoggedIn) {
@@ -179,17 +179,17 @@ function updateAuthButton(authBtn) {
     authBtn.addEventListener('click', () => {
       localStorage.removeItem('token');
       authBtn.textContent = 'Login';
-      authBtn.href = 'login.html'; // Redirige vers la page de connexion
+      authBtn.href = 'login.html'; // Redirige vers page de connexion
       alert('Vous avez été déconnecté.');
-      window.location.href = 'login.html'; // Redirige vers la page de connexion
+      window.location.href = 'login.html'; // Redirige vers page de connexion
     });
   } else {
     authBtn.textContent = 'Login';
-    authBtn.href = 'login.html'; // Redirige vers la page de connexion
+    authBtn.href = 'login.html'; // Redirige vers page de connexion
   }
 }
 
-// Fonction pour récupérer les projets via l'API
+// Fonction récupérer projets via API
 async function fetchProjets() {
   try {
     const response = await fetch("http://localhost:5678/api/works");
@@ -203,7 +203,7 @@ async function fetchProjets() {
   }
 }
 
-// Fonction pour récupérer les catégories via l'API avec gestion des erreurs
+// Fonction récupérer catégories via API avec gestion erreurs
 async function fetchCategories() {
   try {
     const response = await fetch("http://localhost:5678/api/categories");
@@ -217,7 +217,7 @@ async function fetchCategories() {
   }
 }
 
-// Fonction pour afficher la galerie de projets
+// Fonction afficher galerie projets
 function afficherGalerie(projets) {
   const galerie = document.querySelector(".gallery");
   galerie.innerHTML = "";
@@ -236,74 +236,74 @@ function afficherGalerie(projets) {
   });
 }
 
-// Fonction pour filtrer et afficher les projets par catégorie
+// Fonction filtrer et afficher projets par catégorie
 function filtrerGalerie(projets, categoryId) {
   const projetsFiltrees = categoryId === 0 ? projets : projets.filter(projet => projet.categoryId === categoryId);
   afficherGalerie(projetsFiltrees);
 }
 
-// Fonction pour afficher ou masquer les catégories en fonction du statut de connexion
+// Fonction afficher ou masquer catégories selon statut connexion
 function toggleCategoriesVisibility(categorieSection) {
   const isLoggedIn = checkLoginStatus();
   if (isLoggedIn) {
-    categorieSection.style.display = 'none'; // Masquer les boutons de catégorie si l'utilisateur est connecté
+    categorieSection.style.display = 'none'; // Masquer boutons catégorie si connecté
   } else {
-    categorieSection.style.display = ''; // Laisse le CSS gérer le display
+    categorieSection.style.display = ''; // Laisser CSS gérer display
   }
 }
 
-// Fonction pour afficher ou masquer le bouton "Modifier" et l'icône associée
+// Fonction afficher ou masquer bouton "Modifier" et icône associée
 function toggleEditButtonVisibility(editButton) {
   const isLoggedIn = checkLoginStatus();
   if (isLoggedIn) {
-    editButton.style.display = ''; // Afficher le bouton "Modifier" si l'utilisateur est connecté
+    editButton.style.display = ''; // Afficher bouton "Modifier" si connecté
     const editButtonDiv = document.querySelector('.edit-button');
     if (editButtonDiv) {
-      editButtonDiv.style.display = ''; // Afficher l'icône de l'éditeur si l'utilisateur est connecté
+      editButtonDiv.style.display = ''; // Afficher icône éditeur si connecté
     }
   } else {
-    editButton.style.display = 'none'; // Masquer le bouton "Modifier" si l'utilisateur n'est pas connecté
+    editButton.style.display = 'none'; // Masquer bouton "Modifier" si non connecté
     const editButtonDiv = document.querySelector('.edit-button');
     if (editButtonDiv) {
-      editButtonDiv.style.display = 'none'; // Masquer l'icône de l'éditeur si l'utilisateur n'est pas connecté
+      editButtonDiv.style.display = 'none'; // Masquer icône éditeur si non connecté
     }
   }
 }
 
-// Gestion du DOM au chargement de la page
+// Gestion DOM au chargement page
 document.addEventListener('DOMContentLoaded', async () => {
   const authBtn = document.getElementById('auth-btn');
-  const editButton = document.getElementById('editButton'); // Ajout pour le bouton "Modifier"
-  const categorieSection = document.querySelector('.categorie'); // Assurez-vous que la classe est correcte
+  const editButton = document.getElementById('editButton'); // Ajout pour bouton "Modifier"
+  const categorieSection = document.querySelector('.categorie'); // Assurez-vous classe correcte
 
-  // Met à jour le bouton d'authentification au chargement de la page
+  // Met à jour bouton auth au chargement page
   if (authBtn) {
     updateAuthButton(authBtn);
   } else {
     console.error("Élément avec l'ID 'auth-btn' non trouvé");
   }
 
-  // Afficher ou masquer les catégories en fonction du statut de connexion
+  // Afficher ou masquer catégories selon statut connexion
   if (categorieSection) {
     toggleCategoriesVisibility(categorieSection);
   } else {
     console.error("Élément avec la classe 'categorie' non trouvé");
   }
 
-  // Afficher ou masquer le bouton "Modifier"
+  // Afficher ou masquer bouton "Modifier"
   if (editButton) {
     toggleEditButtonVisibility(editButton);
   } else {
     console.error("Élément avec l'ID 'editButton' non trouvé");
   }
 
-  // Récupération des projets et catégories via fetch
+  // Récupérer projets et catégories via fetch
   const projets = await fetchProjets();
   const categories = await fetchCategories();
 
   categories.unshift({ id: 0, name: "Tous" });
 
-  // Création des boutons de catégorie
+  // Création boutons catégorie
   categories.forEach(category => {
     const bouton = document.createElement("button");
     bouton.type = "button";
@@ -314,10 +314,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     categorieSection.appendChild(bouton);
   });
 
-  // Afficher tous les projets au chargement de la page
+  // Afficher tous projets au chargement page
   afficherGalerie(projets);
 
-  // Ajouter des écouteurs d'événements pour les boutons
+  // Ajouter écouteurs événements pour boutons
   const addPictureBtn = document.getElementById("addPictureBtn");
   if (addPictureBtn) {
     addPictureBtn.addEventListener("click", () => showModal('addPictureModal'));
@@ -325,25 +325,25 @@ document.addEventListener('DOMContentLoaded', async () => {
     console.error("Élément avec l'ID 'addPictureBtn' non trouvé");
   }
 
-  // Ajouter des écouteurs d'événements pour fermer les modales
+  // Ajouter écouteurs événements pour fermer modales
   document.querySelectorAll(".fa-xmark").forEach(el => {
     el.addEventListener("click", closeModal);
   });
 
-  // Ajouter des écouteurs pour les boutons de suppression d'image
+  // Ajouter écouteurs pour boutons suppression image
   document.getElementById('galleryImages').addEventListener('click', deleteImage);
   document.querySelector('.gallery').addEventListener('click', deleteImage);
 
-  // Charger dynamiquement les images à partir de l'API
+  // Charger dynamiquement images depuis API
   loadGalleryImagesFromApi(); 
 
-  // Les boutons en haut de la deuxième modale
+  // Boutons haut deuxième modal
   document.getElementById("backToPreviousModal").addEventListener("click", () => {
     showModal('firstModal');
   });
 
   document.querySelector(".modalCloseButton").addEventListener("click", closeModal);
 
-  // Charger les catégories pour le formulaire d'ajout d'image
+  // Charger catégories pour formulaire ajout image
   loadCategories();
 });
