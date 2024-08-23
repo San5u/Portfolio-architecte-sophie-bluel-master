@@ -479,6 +479,7 @@ border-radius: 2px;
 .edit-button i {
     margin-right: 5px; /* Espace entre l'icône et le texte */
     font-size: 1.2em; /* Taille de l'icône */
+	cursor: default;
 	
 }
 

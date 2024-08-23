@@ -97,6 +97,62 @@ photoInput.addEventListener("change", () => {
 document.getElementById("title").addEventListener("input", updateValidateButtonState);
 document.getElementById("selectCategory").addEventListener("change", updateValidateButtonState);
 
+// Ajouter l'événement click pour le bouton "Valider"
+const validateButton = document.getElementById("valider");
+validateButton.addEventListener("click", async () => {
+  const file = photoInput.files[0];
+  const title = document.getElementById("title").value.trim();
+  const category = document.getElementById("selectCategory").options[document.getElementById("selectCategory").selectedIndex].text;
+
+  if (file && title && category) {
+    const formData = new FormData();
+    formData.append('image', file);
+    formData.append('title', title);
+    formData.append('category', category);
+
+    let token = localStorage.getItem('token');
+
+    try {
+      const response = await fetch("http://localhost:5678/api/works", {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${token}` },
+        body: formData
+      });
+
+      if (!response.ok) {
+        throw new Error(`Erreur HTTP ! Statut : ${response.status}`);
+      }
+
+      const image = await response.json();
+      console.log(image);
+
+      // Ajouter l'image à la galerie principale
+      const gallery = document.querySelector('.gallery');
+      console.log(gallery);
+      const figure = document.createElement('figure');
+      const img = document.createElement('img');
+      img.src = image.imageUrl; // URL de l'image depuis l'API
+      img.alt = title;
+
+      const figcaption = document.createElement('figcaption');
+      figcaption.textContent = title;
+
+      figure.appendChild(img);
+      figure.appendChild(figcaption);
+      gallery.appendChild(figure);
+
+      // Réinitialiser le formulaire après ajout
+      photoInput.value = "";
+      document.getElementById("title").value = "";
+      document.getElementById("selectCategory").value = "";
+      document.getElementById("picturePreviewImg").style.display = "none";
+      validateButton.disabled = true;
+    } catch (error) {
+      console.error('Erreur lors de l\'ajout de l\'image :', error);
+    }
+  }
+});
+
 const loadCategories = async () => {
   try {
     const response = await fetch("http://localhost:5678/api/categories");
@@ -290,12 +346,17 @@ document.addEventListener('DOMContentLoaded', async () => {
     console.error("Élément avec la classe 'categorie' non trouvé");
   }
 
-  // Afficher ou masquer bouton "Modifier"
-  if (editButton) {
-    toggleEditButtonVisibility(editButton);
-  } else {
-    console.error("Élément avec l'ID 'editButton' non trouvé");
-  }
+    // Afficher ou masquer bouton "Modifier"
+    if (editButton) {
+      toggleEditButtonVisibility(editButton);
+  
+      // Ajout de l'événement onclick pour ouvrir la modale
+      editButton.onclick = function() {
+        showModal('galleryModal');
+      };
+    } else {
+      console.error("Élément avec l'ID 'editButton' non trouvé");
+    }
 
   // Récupérer projets et catégories via fetch
   const projets = await fetchProjets();
