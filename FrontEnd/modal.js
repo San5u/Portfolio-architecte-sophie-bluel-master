@@ -76,20 +76,20 @@ const updateValidateButtonState = () => {
   const validateButton = document.getElementById("valider");
   validateButton.disabled = !(photoInput && titleInput && categoryInput);
 };
-
 // Prévisualisation image avant ajout et mise à jour état bouton "Valider"
 const photoInput = document.getElementById("photo");
 photoInput.addEventListener("change", () => {
   const file = photoInput.files[0];
   if (file) {
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      const previewImg = document.getElementById("picturePreviewImg");
-      previewImg.src = e.target.result;
-      previewImg.style.display = "block";
-      updateValidateButtonState();
-    };
-    reader.readAsDataURL(file);
+    const objectURL = URL.createObjectURL(file);
+    const previewImg = document.getElementById("picturePreviewImg");
+    previewImg.src = objectURL;
+    previewImg.style.display = "block";
+    updateValidateButtonState();
+  } else {
+    const previewImg = document.getElementById("picturePreviewImg");
+    previewImg.style.display = "none";
+    updateValidateButtonState();
   }
 });
 
@@ -97,7 +97,7 @@ photoInput.addEventListener("change", () => {
 document.getElementById("title").addEventListener("input", updateValidateButtonState);
 document.getElementById("selectCategory").addEventListener("change", updateValidateButtonState);
 
-// Ajouter l'événement click pour le bouton "Valider"
+// Ajouter l'événement click pour bouton Valider
 const validateButton = document.getElementById("valider");
 validateButton.addEventListener("click", async () => {
   const file = photoInput.files[0];
@@ -108,10 +108,12 @@ validateButton.addEventListener("click", async () => {
     const formData = new FormData();
     formData.append('image', file);
     formData.append('title', title);
-    formData.append('category', category);
+    formData.append('category', 1);
+    console.log (category)
 
     let token = localStorage.getItem('token');
 
+ debugger
     try {
       const response = await fetch("http://localhost:5678/api/works", {
         method: 'POST',
