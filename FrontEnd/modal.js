@@ -321,10 +321,23 @@ function toggleEditButtonVisibility(editButton) {
     editButton.style.display = 'none'; // Masquer bouton "Modifier" si non connecté
     const editButtonDiv = document.querySelector('.edit-button');
     if (editButtonDiv) {
-      editButtonDiv.style.display = 'none'; // Masquer icône éditeur si non connecté
+      editButtonDiv.style.display = 'none'; // Masquer icône editeur si non connecté
     }
   }
 }
+
+function toggleBandeauVisibility() {
+  const isLoggedIn = checkLoginStatus(); // utilisateur co ou pas
+  const bandeau = document.querySelector('.bandeau');
+  
+  if (isLoggedIn) {
+    bandeau.style.display = 'flex'; // Afficher le bandeau si connecté
+  } else {
+    bandeau.style.display = 'none'; // Masquer le bandeau si non connectée
+  }
+}
+
+document.addEventListener('DOMContentLoaded', toggleBandeauVisibility);
 
 // Gestion DOM au chargement page
 document.addEventListener('DOMContentLoaded', async () => {
@@ -357,6 +370,18 @@ document.addEventListener('DOMContentLoaded', async () => {
     } else {
       console.error("Élément avec l'ID 'editButton' non trouvé");
     }
+
+
+const editModeButton = document.querySelector('.bandeau .modifier'); 
+
+if (editModeButton) {
+  editModeButton.addEventListener('click', (event) => {
+    event.preventDefault(); 
+    showModal('galleryModal'); // Ouvre la première modale 
+  });
+} else {
+  console.error("Élément avec la classe 'modifier' non trouvé dans le bandeau");
+}
 
   // Récupérer projets et catégories via fetch
   const projets = await fetchProjets();
@@ -408,3 +433,4 @@ document.addEventListener('DOMContentLoaded', async () => {
   // Charger catégories pour formulaire ajout image
   loadCategories();
 });
+

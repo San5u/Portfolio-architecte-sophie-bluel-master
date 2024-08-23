@@ -547,7 +547,7 @@ border-radius: 2px;
 }
 
 #picturePreviewImg {
-    max-width: 100%;
+    max-width: 36%;
     height: auto;
     display: none; 
 	position: absolute;
@@ -609,4 +609,25 @@ border-radius: 2px;
 .categorie button:hover {
 	background-color: #1D6154;
 	color: white;
+}
+
+.bandeau {
+	background-color: black;
+	display: flex;
+	justify-content: center;
+	padding: 15px;
+	width: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+
+	
+}
+
+.bandeau a {
+	color: white;
+	text-decoration: none;
+}
+.bandeau i {
+	margin-right: 10px;
 }
