@@ -16,3 +16,4 @@ function updateAuthButton(authBtn) {
         authBtn.href = 'login.html'; // Redirige vers la page de connexion
     }
 }
+

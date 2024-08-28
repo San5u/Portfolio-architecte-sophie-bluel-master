@@ -227,9 +227,23 @@ input[type="submit"]{
 	display: block;
 }
 
+
+.index-footer {
+position:absolute;
+left: 0px;
+right: 0px;
+
+}
+
+.index-footer nav{
+
+	margin-right: 150px;
+}
+
 footer{
 	background-color: white;
 	padding: 2px;
+
 }
 
 footer nav {
@@ -248,11 +262,16 @@ text-decoration: none;
 
 }
 
+li a{
+    
+    color: black; 
+}
 
 #contact, #login > * {
 	text-align: center;
-
 }
+
+
 #contact h2, #login h2 {
 	margin-bottom: 20px;
 }
@@ -285,7 +304,7 @@ color: #3D3D3D;;
 
 #login {
 	margin-top: 50px;
-	margin-bottom: 50px;
+	margin-bottom: 335px;
 }
 
 
@@ -615,11 +634,11 @@ border-radius: 2px;
 	background-color: black;
 	display: flex;
 	justify-content: center;
-	padding: 15px;
+	padding: 10px;
 	width: 100%;
 	position: absolute;
 	top: 0;
-	left: 0;
+	right:0;
 
 	
 }

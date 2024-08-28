@@ -29,6 +29,8 @@ const closeModal = (e) => {
 // Fonction suppression image
 const deleteImage = async (e) => {
   if (e.target.closest('.deleteImageBtn')) {
+    e.preventDefault(); // evite le rafraichissement
+
     const button = e.target.closest('.deleteImageBtn');
     const imageId = button.dataset.id;
 
@@ -97,23 +99,23 @@ photoInput.addEventListener("change", () => {
 document.getElementById("title").addEventListener("input", updateValidateButtonState);
 document.getElementById("selectCategory").addEventListener("change", updateValidateButtonState);
 
-// Ajouter l'événement click pour bouton Valider
+// Ajouter l'événement click pour le bouton Valider
 const validateButton = document.getElementById("valider");
-validateButton.addEventListener("click", async () => {
-  const file = photoInput.files[0];
-  const title = document.getElementById("title").value.trim();
-  const category = document.getElementById("selectCategory").options[document.getElementById("selectCategory").selectedIndex].text;
+validateButton.addEventListener("click", async (event) => {
+  event.preventDefault(); // pas de rafraichissement de page
 
-  if (file && title && category) {
+  const fichier = photoInput.files[0];
+  const titre = document.getElementById("title").value.trim();
+  const categorieId = document.getElementById("selectCategory").options[document.getElementById("selectCategory").selectedIndex].value;
+
+  if (fichier && titre && categorieId) {
     const formData = new FormData();
-    formData.append('image', file);
-    formData.append('title', title);
-    formData.append('category', 1);
-    console.log (category)
+    formData.append('image', fichier);
+    formData.append('title', titre);
+    formData.append('category', categorieId);
 
     let token = localStorage.getItem('token');
 
- debugger
     try {
       const response = await fetch("http://localhost:5678/api/works", {
         method: 'POST',
@@ -126,22 +128,22 @@ validateButton.addEventListener("click", async () => {
       }
 
       const image = await response.json();
-      console.log(image);
 
-      // Ajouter l'image à la galerie principale
+      // Ajouter l'image à la galerie principale sans supprimer les anciennes
       const gallery = document.querySelector('.gallery');
-      console.log(gallery);
-      const figure = document.createElement('figure');
-      const img = document.createElement('img');
-      img.src = image.imageUrl; // URL de l'image depuis l'API
-      img.alt = title;
+      if (gallery) {
+        const figure = document.createElement('figure');
+        const img = document.createElement('img');
+        img.src = image.imageUrl;
+        img.alt = titre;
 
-      const figcaption = document.createElement('figcaption');
-      figcaption.textContent = title;
+        const figcaption = document.createElement('figcaption');
+        figcaption.textContent = titre;
 
-      figure.appendChild(img);
-      figure.appendChild(figcaption);
-      gallery.appendChild(figure);
+        figure.appendChild(img);
+        figure.appendChild(figcaption);
+        gallery.appendChild(figure); // Ajout de l'image sans réinitialiser la galerie
+      }
 
       // Réinitialiser le formulaire après ajout
       photoInput.value = "";
@@ -149,9 +151,19 @@ validateButton.addEventListener("click", async () => {
       document.getElementById("selectCategory").value = "";
       document.getElementById("picturePreviewImg").style.display = "none";
       validateButton.disabled = true;
+
+      // Fermer la fenêtre modale
+      const modal = document.querySelector('.modal');
+      if (modal) {
+        modal.style.display = "none";
+        document.body.style.overflow = "auto"; 
+      }
+
     } catch (error) {
       console.error('Erreur lors de l\'ajout de l\'image :', error);
     }
+  } else {
+    console.warn('Tous les champs doivent être remplis.');
   }
 });
 
@@ -422,6 +434,8 @@ if (editModeButton) {
   document.getElementById('galleryImages').addEventListener('click', deleteImage);
   document.querySelector('.gallery').addEventListener('click', deleteImage);
 
+
+  
   // Charger dynamiquement images depuis API
   loadGalleryImagesFromApi(); 
 
@@ -435,4 +449,5 @@ if (editModeButton) {
   // Charger catégories pour formulaire ajout image
   loadCategories();
 });
+
 
