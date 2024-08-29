@@ -48,9 +48,7 @@ table {
 }
 /** end reset css**/
 
-html {
-    scroll-behavior: smooth; /* Ajoute un défilement en douceur pour les ancres */
-}
+
 
 html {
 	background: #FFFEF8;
@@ -108,7 +106,7 @@ border: 5px
 
 
 .fa-instagram {
-    font-size: 24px; /* Taille de l'icône en pixels */
+    font-size: 24px; 
 }
 
 
@@ -214,7 +212,7 @@ margin: auto;
 
 input[type="submit"]{
 	font-family: 'Syne';
-	font-weight: 700;
+	font-weight: 500;
 	color: white;
 	background-color: #1D6154;
 	margin : 2em auto ;
@@ -225,6 +223,14 @@ input[type="submit"]{
 	height: 39px;
 	border: none;
 	display: block;
+	
+}
+
+.modalContent input[type="submit"] {
+	position: absolute;
+	right: 200px;
+	left: 195px;
+	top: 580px;
 }
 
 
@@ -469,20 +475,21 @@ border-radius: 2px;
 
 /* Conteneur principal de la section portfolio */
 #portfolio {
-    padding: 50px; /* Ajustez selon vos besoins */
+    padding: 50px; 
 }
 
 /* Conteneur pour le titre et le bouton Modifier */
 .portfolio-container {
 	display: flex;
-    justify-content: center; /* Centre le titre */
-    align-items: center; /* Aligne verticalement le titre et le bouton Modifier */
+    justify-content: center; 
+    align-items: center;
     position: relative; 
+	margin-bottom: 50px;
 }
 
 /* Style pour le titre "Mes Projets" */
 .portfolio-title {
-    margin: 0; /* Supprime les marges par défaut */
+    margin: 0;
 	margin-right: 10px;
 }
 
@@ -490,28 +497,28 @@ border-radius: 2px;
 .edit-button {
     display: flex;
     align-items: center;
-    cursor: pointer; /* Ajoute un effet de curseur pointer pour indiquer qu'il s'agit d'un élément cliquable */
-    color: #1D6154; /* Couleur du texte, changez-la selon la couleur de "Mes Projets" */
+    cursor: pointer;
+    color: #1D6154;
 	margin-top: -25px;
 }
 
 .edit-button i {
-    margin-right: 5px; /* Espace entre l'icône et le texte */
-    font-size: 1.2em; /* Taille de l'icône */
-	cursor: default;
+    margin-right: 5px; 
+    font-size: 1.2em; 
+	
 	
 }
 
 #editButton {
-    font-size: 1em; /* Taille de la police du texte "Modifier" */
-    font-weight: 700; /* Poids de la police du texte, modifiez si nécessaire */
+    font-size: 1em; 
+    font-weight: 700; 
 }
 
 #labelPhoto {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	height: 200px;
+	height: 180px;
 	background-color: #E8F1F6;
 	border-radius: 3px;
 	margin-bottom: 30px;
@@ -649,4 +656,52 @@ border-radius: 2px;
 }
 .bandeau i {
 	margin-right: 10px;
+}
+
+ .TitreCategorie #title {
+	position: absolute;
+bottom: 230px;
+left: 105px;
+margin-bottom: 40px;
+width: 414px;
+display: flex;
+justify-content: center;
+}
+
+.TitreCategorie #selectCategory {
+	position: absolute;
+	bottom: 130px;
+	left: 105px;
+	margin-bottom: 40px;
+width: 420px;
+display: flex;
+justify-content: center;
+}
+
+
+
+
+
+.DeuxioSeparateur {
+    height: 1px;
+    background-color: #B3B3B3;
+    margin: 20px 0;
+	width: 66%;
+	position: absolute;
+	left: 105px;
+	bottom: 98px;
+}
+
+.label-title {
+
+	position: absolute;
+	left: 105px;
+	font-weight: 500;
+	font-size: 14px;
+}
+
+.label-category {
+position: absolute;
+bottom: 230px;
+
 }

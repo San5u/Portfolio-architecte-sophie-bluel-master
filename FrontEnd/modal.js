@@ -176,7 +176,7 @@ const loadCategories = async () => {
     const categories = await response.json();
 
     const categorySelect = document.getElementById("selectCategory");
-    categorySelect.innerHTML = '<option value="" disabled selected>Choisissez une catégorie</option>'; 
+    categorySelect.innerHTML = '<option value="" disabled selected></option>'; 
 
     categories.forEach(category => {
       const option = document.createElement("option");
@@ -356,7 +356,7 @@ document.addEventListener('DOMContentLoaded', toggleBandeauVisibility);
 // Gestion DOM au chargement page
 document.addEventListener('DOMContentLoaded', async () => {
   const authBtn = document.getElementById('auth-btn');
-  const editButton = document.getElementById('editButton'); // Ajout pour bouton "Modifier"
+  const editButtonDiv =  document.querySelector('.edit-button'); // Ajout pour bouton "Modifier"
   const categorieSection = document.querySelector('.categorie'); // Assurez-vous classe correcte
 
   // Met à jour bouton auth au chargement page
@@ -374,11 +374,11 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
     // Afficher ou masquer bouton "Modifier"
-    if (editButton) {
-      toggleEditButtonVisibility(editButton);
+    if (editButtonDiv) {
+      toggleEditButtonVisibility(editButtonDiv);
   
       // Ajout de l'événement onclick pour ouvrir la modale
-      editButton.onclick = function() {
+      editButtonDiv.onclick = function() {
         showModal('galleryModal');
       };
     } else {
@@ -441,7 +441,7 @@ if (editModeButton) {
 
   // Boutons haut deuxième modal
   document.getElementById("backToPreviousModal").addEventListener("click", () => {
-    showModal('firstModal');
+    showModal('galleryModal');
   });
 
   document.querySelector(".modalCloseButton").addEventListener("click", closeModal);
