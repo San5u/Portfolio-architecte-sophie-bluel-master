@@ -1,5 +1,8 @@
-// Fonction affichage modal
-const showModal = (modalId) => {
+const showModal = (modalId, event = null) => {
+  if (event) {
+    event.preventDefault(); 
+  }
+
   // Cacher toutes les modales
   document.querySelectorAll('.modal').forEach(modal => {
     modal.classList.remove('visible');
@@ -23,18 +26,17 @@ const closeModal = (e) => {
   const modal = e.target.closest('.modal');
   if (modal) {
     modal.classList.remove('visible');
+    document.body.style.overflow = 'auto';
   }
 };
 
 // Fonction suppression image
 const deleteImage = async (e) => {
   if (e.target.closest('.deleteImageBtn')) {
-    e.preventDefault(); // evite le rafraichissement
+    e.preventDefault(); // évite le rafraîchissement
 
     const button = e.target.closest('.deleteImageBtn');
     const imageId = button.dataset.id;
-
-    alert(`Vous avez cliqué sur l'image avec l'ID : ${imageId}`);
 
     let token = localStorage.getItem('token');
 
@@ -59,10 +61,11 @@ const deleteImage = async (e) => {
       // Supprimer image de la galerie principale
       const mainGallery = document.querySelector('.gallery');
       const imageInMainGallery = Array.from(mainGallery.getElementsByTagName('figure'))
-        .find(f => f.querySelector('.deleteImageBtn') && f.querySelector('.deleteImageBtn').dataset.id === imageId);
+        .find(f => f.querySelector('img').src === imageToRemove.querySelector('img').src);
       if (imageInMainGallery) {
         imageInMainGallery.remove();
       }
+
     } catch (error) {
       console.error('Erreur lors de la suppression de l\'image :', error);
     }
@@ -78,22 +81,34 @@ const updateValidateButtonState = () => {
   const validateButton = document.getElementById("valider");
   validateButton.disabled = !(photoInput && titleInput && categoryInput);
 };
-// Prévisualisation image avant ajout et mise à jour état bouton "Valider"
+// Previsu image avant ajout + maj état bouton "Valider"
 const photoInput = document.getElementById("photo");
+const browseButton = document.getElementById("browsePictures"); 
+const previewImg = document.getElementById("picturePreviewImg");
+
+// Événement de changement pour l'input photo
 photoInput.addEventListener("change", () => {
   const file = photoInput.files[0];
   if (file) {
     const objectURL = URL.createObjectURL(file);
-    const previewImg = document.getElementById("picturePreviewImg");
     previewImg.src = objectURL;
     previewImg.style.display = "block";
-    updateValidateButtonState();
+    browseButton.style.display = "none"; 
   } else {
-    const previewImg = document.getElementById("picturePreviewImg");
     previewImg.style.display = "none";
-    updateValidateButtonState();
+    browseButton.style.display = "block"; 
   }
 });
+
+// Fonction pour réinitialiser le formulaire et le bouton
+const resetForm = () => {
+  photoInput.value = ""; 
+  previewImg.style.display = "none"; 
+  browseButton.style.display = "block"; 
+};
+
+// appel fonction  reinitialisation
+document.getElementById("resetButton")?.addEventListener("click", resetForm);
 
 // Écouter changements dans autres champs
 document.getElementById("title").addEventListener("input", updateValidateButtonState);
@@ -102,7 +117,7 @@ document.getElementById("selectCategory").addEventListener("change", updateValid
 // Ajouter l'événement click pour le bouton Valider
 const validateButton = document.getElementById("valider");
 validateButton.addEventListener("click", async (event) => {
-  event.preventDefault(); // pas de rafraichissement de page
+  event.preventDefault(); 
 
   const fichier = photoInput.files[0];
   const titre = document.getElementById("title").value.trim();
@@ -129,7 +144,7 @@ validateButton.addEventListener("click", async (event) => {
 
       const image = await response.json();
 
-      // Ajouter l'image à la galerie principale sans supprimer les anciennes
+      // Ajouter l'image à la galerie  sans suppr les autre
       const gallery = document.querySelector('.gallery');
       if (gallery) {
         const figure = document.createElement('figure');
@@ -142,20 +157,23 @@ validateButton.addEventListener("click", async (event) => {
 
         figure.appendChild(img);
         figure.appendChild(figcaption);
-        gallery.appendChild(figure); // Ajout de l'image sans réinitialiser la galerie
+        gallery.appendChild(figure); 
       }
 
-      // Réinitialiser le formulaire après ajout
+      // Reinitialiser le form après ajout
       photoInput.value = "";
       document.getElementById("title").value = "";
       document.getElementById("selectCategory").value = "";
       document.getElementById("picturePreviewImg").style.display = "none";
       validateButton.disabled = true;
 
+      // Reinitialiser la modale pour permettre de nouveau les clics
+      loadGalleryImagesFromApi();
+
       // Fermer la fenêtre modale
       const modal = document.querySelector('.modal');
       if (modal) {
-        modal.style.display = "none";
+        modal.style.display = "visible";
         document.body.style.overflow = "auto"; 
       }
 

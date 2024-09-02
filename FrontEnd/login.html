@@ -11,48 +11,43 @@
 	<meta name="description" content="">
     <link rel="stylesheet" href="./assets/style.css">
     
-
-
 </head>
 <body>
+    <header id="header" class="header">
+        <h1>Sophie Bluel <span>ARCHITECTE D'INTÉRIEUR</span></h1>
+        <nav>
+            <ul>
+                <li><a href="index.html#portfolio">Projets</a></li>
+                <li><a href="index.html#SectionAncre" class="btn">Contact</a></li>
+            
+                <li><a href="login.html">Login</a></li>
+                <li><a class="fa-brands fa-instagram"></a></li>
+            </ul>
+        </nav>
 
+    </header>
+    <main>
+            <section id="login"> 
+                <H2> log In</H2>
+                    <form id="Connexion"> 
+        
+                        <label for="email">email :</label>
+                        <input type="email" id="email" name="email" value="sophie.bluel@test.tld">
+                        <label for="password">Mot de passe</label>
+                        <input type="password" id="password" name="password" value="S0phie">
+                        <input type="submit" value="Se connecter" id="btnlogin">
+                </form>
+                <p><a href="#">Mot de passe oublié</a></p>
+        </section>  
+    </main>
 
-
-<header id="header" class="header">
-    <h1>Sophie Bluel <span>ARCHITECTE D'INTÉRIEUR</span></h1>
-	<nav>
-		<ul>
-			<li><a href="index.html#contact">Projets</a></li>
-            <li><a href="index.html#contact" class="btn">Contact</a></li>
-           
-			<li><a href="login.html">Login</a></li>
-			<li><a class="fa-brands fa-instagram"></a></li>
-		</ul>
-	</nav>
-
-</header>
-<main>
-        <section id="login"> 
-            <H2> log In</H2>
-                <form id="Connexion"> 
-       
-                    <label for="email">email :</label>
-                    <input type="email" id="email" name="email" value="sophie.bluel@test.tld">
-                    <label for="password">Mot de passe</label>
-                    <input type="password" id="password" name="password" value="S0phie">
-                    <input type="submit" value="Se connecter" id="btnlogin">
-             </form>
-             <p><a href="#">Mot de passe oublié</a></p>
-    </section>  
-</main>
-
-<footer>
-	<nav>
-		<ul>
-			<li>Mentions Légales</li>
-		</ul>
-	</nav>
-</footer>
+    <footer>
+        <nav>
+            <ul>
+                <li>Mentions Légales</li>
+            </ul>
+        </nav>
+    </footer>
 
 </body>
 <script src="login.js"></script>
