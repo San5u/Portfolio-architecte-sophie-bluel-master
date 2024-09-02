@@ -103,8 +103,11 @@ photoInput.addEventListener("change", () => {
 // Fonction pour réinitialiser le formulaire et le bouton
 const resetForm = () => {
   photoInput.value = ""; 
+  document.getElementById("title").value = "";
+  document.getElementById("selectCategory").value = "";
   previewImg.style.display = "none"; 
   browseButton.style.display = "block"; 
+  updateValidateButtonState(); // Desactiver bouton valider
 };
 
 // appel fonction  reinitialisation
@@ -161,11 +164,10 @@ validateButton.addEventListener("click", async (event) => {
       }
 
       // Reinitialiser le form après ajout
-      photoInput.value = "";
-      document.getElementById("title").value = "";
-      document.getElementById("selectCategory").value = "";
-      document.getElementById("picturePreviewImg").style.display = "none";
-      validateButton.disabled = true;
+      resetForm();
+
+      // Réafficher le bouton "Ajouter photo"
+      browseButton.style.display = "block";
 
       // Reinitialiser la modale pour permettre de nouveau les clics
       loadGalleryImagesFromApi();
